@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { Mail, MessageCircle, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "@/lib/language";
@@ -9,6 +11,7 @@ import AboutSection from "@/components/ui/about-section";
 import TeamSection from "@/components/ui/team-section";
 import StudioStorySection from "@/components/ui/studio-story-section";
 import BlogSection from "@/components/ui/blog-section";
+import { projects } from "@/lib/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,21 +79,24 @@ export default function PortfolioSections() {
             </div>
           </div>
           <div ref={workRef} className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {[
-              ["Atlas / Identity", "Brand system · 2024", "bg-[#d96f4f]"],
-              ["Moss / Digital", "Web experience · 2024", "bg-[#9aa88f]"],
-              ["Forma / Culture", "Campaign direction · 2023", "bg-[#d7b995]"],
-            ].map(([title, type, color]) => (
-              <article key={title} className="min-w-[82vw] snap-start sm:min-w-[420px]">
-                <div className={`group relative aspect-[4/3] overflow-hidden rounded-[2rem] ${color}`}>
-                  <div className="absolute inset-8 rounded-[1.25rem] border border-[#1d2b24]/20 transition-transform duration-500 group-hover:rotate-3 group-hover:scale-105" />
-                  <div className="absolute bottom-8 left-8 text-5xl font-semibold tracking-[-0.08em] text-[#1d2b24]/80">{title.split(" / ")[0]}</div>
-                </div>
+            {projects.map((project) => (
+              <article key={project.slug} className="min-w-[82vw] snap-start sm:min-w-[420px]">
+                <Link href={`/projects/${project.slug}`} className="group relative block aspect-[4/3] overflow-hidden rounded-[2rem] bg-[#d7b995]" style={{ backgroundColor: project.accent }}>
+                  {project.preview ? (
+                    <Image src={project.preview} alt={`Aperçu de ${project.name}`} fill sizes="(max-width: 640px) 82vw, 420px" className="object-cover transition duration-700 group-hover:scale-105" />
+                  ) : (
+                    <div className="flex h-full items-end p-8">
+                      <span className="text-[8rem] font-semibold leading-none tracking-[-0.12em] text-[#1d2b24]/70">{project.initials}</span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1d2b24]/55 via-transparent to-transparent opacity-70" />
+                  <div className="absolute bottom-6 left-7 text-sm font-medium uppercase tracking-[0.18em] text-white/90">{project.category}</div>
+                </Link>
                 <div className="mt-4 flex items-end justify-between gap-4">
-                  <div><h3 className="text-xl">{title}</h3><p className="mt-1 text-sm text-[#68736b]">{type}</p></div>
-                  <div className="flex gap-2">
-                    <a href="#contact" className="inline-flex items-center gap-1 rounded-full border border-[#bcae9c] px-3 py-2 text-xs hover:bg-[#e8dfd1]">{t("preview")} <ArrowUpRight className="h-3 w-3" /></a>
-                    <a href="https://github.com/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-full bg-[#1d2b24] px-3 py-2 text-xs text-[#f4f0e8] hover:bg-[#d96f4f]">{t("github")} <ArrowUpRight className="h-3 w-3" /></a>
+                  <div><h3 className="text-xl">{project.name}</h3><p className="mt-1 text-sm text-[#68736b]">{project.summary}</p></div>
+                  <div className="flex shrink-0 gap-2">
+                    <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-1 rounded-full border border-[#bcae9c] px-3 py-2 text-xs hover:bg-[#e8dfd1]">{t("preview")} <ArrowUpRight className="h-3 w-3" /></Link>
+                    <a href={project.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-full bg-[#1d2b24] px-3 py-2 text-xs text-[#f4f0e8] hover:bg-[#d96f4f]">Live <ArrowUpRight className="h-3 w-3" /></a>
                   </div>
                 </div>
               </article>
