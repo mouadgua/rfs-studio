@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Suspense } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getProject, projects } from "@/lib/projects";
 
@@ -15,7 +16,11 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   return { title: project ? `${project.name} — rfs studio` : "Projet — rfs studio" };
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+function ProjectPageFallback() {
+  return <main className="min-h-screen bg-[#f4f0e8]" />;
+}
+
+async function ProjectPageContent({ params }: ProjectPageProps) {
   const project = getProject((await params).slug);
 
   if (!project) {
@@ -49,5 +54,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function ProjectPage({ params }: ProjectPageProps) {
+  return (
+    <Suspense fallback={<ProjectPageFallback />}>
+      <ProjectPageContent params={params} />
+    </Suspense>
   );
 }

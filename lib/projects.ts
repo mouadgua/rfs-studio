@@ -36,17 +36,6 @@ export const projects: Project[] = [
     initials: "B",
   },
   {
-    slug: "gourmetnote",
-    name: "GourmetNote",
-    url: "https://gourmetnote-notation-de-plats-ios.ai.studio",
-    category: "Mobile · Food",
-    summary: "Web-app mobile-first d'évaluation culinaire, inspirée d'iOS.",
-    description:
-      "GourmetNote gamifie le feedback client plat par plat afin d'aider les restaurants à optimiser leur menu. Le parcours mobile-first s'appuie sur des gestes familiers, une hiérarchie claire et des retours immédiats pour rendre chaque avis simple et utile.",
-    accent: "#ed7b52",
-    initials: "G",
-  },
-  {
     slug: "kollectif-cafe",
     name: "Kollectif Café",
     url: "https://kollectif-caf-de-sp-cialit.ai.studio",
@@ -55,6 +44,7 @@ export const projects: Project[] = [
     description:
       "Kollectif Café affirme la personnalité d'un commerce de spécialité par une vitrine néo-brutaliste et un catalogue interactif. Le filtrage dynamique permet de parcourir rapidement les origines, torréfactions et formats disponibles.",
     accent: "#f0c26b",
+    preview: "/projects/kollectif-cafe.png",
     initials: "K",
   },
   {
@@ -66,6 +56,7 @@ export const projects: Project[] = [
     description:
       "Clinique Espace Patient réduit les appels au standard grâce à un portail rassurant et accessible. La prise de rendez-vous autonome, l'historique digitalisé et la timeline de suivi réunissent les informations essentielles dans une expérience Soft UI apaisée.",
     accent: "#9bc5bd",
+    preview: "/projects/clinique-espace-patient.png",
     initials: "C",
   },
   {
@@ -77,6 +68,7 @@ export const projects: Project[] = [
     description:
       "Neochrome Streetwear compose une expérience d'achat immersive autour d'un lookbook Y2K cyber. Le défilement horizontal, les contrastes chromés et les transitions éditoriales donnent aux collections le rythme d'une campagne tout en guidant naturellement vers la conversion.",
     accent: "#c39cff",
+    preview: "/projects/neochrome-streetwear.png",
     initials: "N",
   },
   {
@@ -99,6 +91,7 @@ export const projects: Project[] = [
     summary: "CRM Kanban pour le Cash on Delivery et WhatsApp.",
     description:
       "COD Master structure le suivi des expéditions locales, la réconciliation des paiements et la gestion des livreurs indépendants. Le Kanban donne à chaque équipe un état clair des commandes, avec WhatsApp au cœur des échanges opérationnels.",
+    preview: "/projects/cod-master.png",
     accent: "#8ee29e",
     initials: "C",
   },
