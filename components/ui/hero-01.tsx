@@ -12,10 +12,10 @@ import { useLanguage } from "@/lib/language";
 export default function AgencyHeroSection() {
   const { t } = useLanguage();
   const avatarList: AvatarList[] = [
-    { image: "https://i.pravatar.cc/100?img=12" },
-    { image: "https://i.pravatar.cc/100?img=32" },
-    { image: "https://i.pravatar.cc/100?img=47" },
-    { image: "https://i.pravatar.cc/100?img=5" },
+    { image: "M" },
+    { image: "N" },
+    { image: "Y" },
+    { image: "R" },
   ];
 
   const navigationData: NavigationSection[] = [
@@ -28,11 +28,11 @@ export default function AgencyHeroSection() {
   ];
 
   const brandList: BrandList[] = [
-    { image: "https://cdn.simpleicons.org/nike/111111", lightimg: "", name: "Nike" },
-    { image: "https://cdn.simpleicons.org/spotify/111111", lightimg: "", name: "Spotify" },
-    { image: "https://cdn.simpleicons.org/notion/111111", lightimg: "", name: "Notion" },
-    { image: "https://cdn.simpleicons.org/airbnb/111111", lightimg: "", name: "Airbnb" },
-    { image: "https://cdn.simpleicons.org/github/111111", lightimg: "", name: "GitHub" },
+    { name: "Nike" },
+    { name: "Spotify" },
+    { name: "Notion" },
+    { name: "Airbnb" },
+    { name: "GitHub" },
   ];
 
   return (

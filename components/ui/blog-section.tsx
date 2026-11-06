@@ -1,12 +1,7 @@
 "use client";
 
 import { ArrowUpRight, CalendarDays } from "lucide-react";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "@/lib/language";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const articles = [
   {
@@ -33,32 +28,11 @@ const articles = [
 ] as const;
 
 export default function BlogSection() {
-  const sectionRef = useRef<HTMLElement>(null);
   const { t } = useLanguage();
-
-  useEffect(() => {
-    const context = gsap.context(() => {
-      gsap.from("[data-blog-reveal]", {
-        y: 32,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 82%",
-          once: true,
-        },
-      });
-    }, sectionRef);
-
-    return () => context.revert();
-  }, []);
 
   return (
     <section
       id="blog"
-      ref={sectionRef}
       className="border-b border-[#d9cdbd] bg-[#f4f0e8] px-6 py-24 lg:px-10 lg:py-36"
     >
       <div className="mx-auto max-w-7xl">

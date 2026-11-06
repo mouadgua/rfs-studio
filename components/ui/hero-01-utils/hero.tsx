@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/language";
 import { Button } from "@/components/ui/button";
 
@@ -18,7 +16,6 @@ interface HeroProps {
 export default function HeroSection({ avatarList }: HeroProps) {
   const [countries, setCountries] = useState(0);
   const { language, t } = useLanguage();
-  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -26,27 +23,6 @@ export default function HeroSection({ avatarList }: HeroProps) {
     }, 90);
     return () => window.clearInterval(timer);
   }, []);
-
-  useEffect(() => {
-    if (!titleRef.current) return;
-    const words = titleRef.current.querySelectorAll<HTMLElement>("[data-title-word]");
-    const context = gsap.context(() => {
-      gsap.fromTo(
-        words,
-        { yPercent: 110, rotate: 3, opacity: 0 },
-        {
-          yPercent: 0,
-          rotate: 0,
-          opacity: 1,
-          duration: 0.9,
-          stagger: 0.075,
-          delay: 0.15,
-          ease: "power4.out",
-        },
-      );
-    }, titleRef);
-    return () => context.revert();
-  }, [language, t]);
 
   const titleWords = t("title").split(" ");
 
@@ -57,7 +33,6 @@ export default function HeroSection({ avatarList }: HeroProps) {
           {t("eyebrow")}
         </p>
         <h1
-          ref={titleRef}
           aria-label={t("title")}
           className="max-w-4xl text-[clamp(3.5rem,8vw,8.5rem)] font-medium leading-[0.88] tracking-[-0.09em] text-[#1d2b24]"
         >
@@ -87,16 +62,14 @@ export default function HeroSection({ avatarList }: HeroProps) {
         </p>
         <div className="mt-10 flex items-center gap-4 border-t border-[#d9cdbd] pt-5">
           <div className="flex -space-x-3">
-            {avatarList.map((avatar, index) => (
-              <Image
+            {avatarList.map((avatar) => (
+              <span
                 key={avatar.image}
-                src={avatar.image}
-                alt=""
-                width={40}
-                height={40}
-                className="h-10 w-10 rounded-full border-2 border-[#f4f0e8] object-cover"
-                loading={index === 0 ? "eager" : "lazy"}
-              />
+                aria-hidden="true"
+                className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#f4f0e8] bg-[#9aa88f] text-xs font-semibold text-[#1d2b24]"
+              >
+                {avatar.image}
+              </span>
             ))}
           </div>
           <p className="text-xs leading-relaxed text-[#8b7561]">

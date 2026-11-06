@@ -1,34 +1,14 @@
 "use client";
 
 import { ArrowUpRight, Check, Sparkles } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState } from "react";
 import { useLanguage } from "@/lib/language";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type StoryTab = "overview" | "process" | "impact";
 
 export default function StudioStorySection() {
   const [activeTab, setActiveTab] = useState<StoryTab>("overview");
-  const sectionRef = useRef<HTMLElement>(null);
   const { t } = useLanguage();
-
-  useEffect(() => {
-    const context = gsap.context(() => {
-      gsap.from("[data-story-reveal]", {
-        y: 34,
-        opacity: 0,
-        filter: "blur(8px)",
-        duration: 0.8,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 82%", once: true },
-      });
-    }, sectionRef);
-    return () => context.revert();
-  }, []);
 
   const tabContent = {
     overview: {
@@ -49,7 +29,7 @@ export default function StudioStorySection() {
   }[activeTab];
 
   return (
-    <section id="studio-story" ref={sectionRef} className="overflow-hidden border-b border-[#33483d] bg-[#1d2b24] px-4 py-16 text-[#f4f0e8] md:py-24">
+    <section id="studio-story" className="overflow-hidden border-b border-[#33483d] bg-[#1d2b24] px-4 py-16 text-[#f4f0e8] md:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 flex items-center justify-between" data-story-reveal>
           <div className="flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-[#cbd3c8]">

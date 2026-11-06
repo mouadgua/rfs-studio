@@ -45,7 +45,7 @@ async function ProjectPageContent({ params }: ProjectPageProps) {
             <p className="mt-8 max-w-xl text-xl leading-relaxed text-[#68736b]">{project.summary}</p>
           </div>
           <div className="overflow-hidden rounded-[2rem] bg-[#d7b995]" style={{ backgroundColor: project.accent }}>
-            {project.preview ? <Image src={project.preview} alt={`Aperçu de ${project.name}`} width={1200} height={900} className="aspect-[4/3] h-full w-full object-cover" /> : <div className="flex aspect-[4/3] items-end p-10"><span className="text-[12rem] font-semibold leading-none tracking-[-0.15em] text-[#1d2b24]/70">{project.initials}</span></div>}
+            {project.preview ? <Image src={project.preview} alt={`Aperçu de ${project.name}`} width={1200} height={900} quality={70} priority className="aspect-[4/3] h-full w-full object-cover" /> : <div className="flex aspect-[4/3] items-end p-10"><span className="text-[12rem] font-semibold leading-none tracking-[-0.15em] text-[#1d2b24]/70">{project.initials}</span></div>}
           </div>
         </div>
         <div className="mt-20 grid gap-12 border-t border-[#d9cdbd] pt-12 md:grid-cols-[0.35fr_1fr]">

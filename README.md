@@ -20,6 +20,12 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## SEO en production
+
+Configure `NEXT_PUBLIC_SITE_URL` with the public URL of the deployed site (for example
+`https://studio.example.com`). This value is used by the canonical URL, Open Graph
+metadata, `robots.txt`, and `sitemap.xml`.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

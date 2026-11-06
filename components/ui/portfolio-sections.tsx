@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Mail, MessageCircle, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "@/lib/language";
 import AboutSection from "@/components/ui/about-section";
 import TeamSection from "@/components/ui/team-section";
@@ -13,35 +11,12 @@ import StudioStorySection from "@/components/ui/studio-story-section";
 import BlogSection from "@/components/ui/blog-section";
 import { projects } from "@/lib/projects";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function PortfolioSections() {
-  const contentRef = useRef<HTMLDivElement>(null);
   const workRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
-  useEffect(() => {
-    const context = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element, index) => {
-        gsap.fromTo(
-          element,
-          { y: 48, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            delay: (index % 3) * 0.08,
-            ease: "power3.out",
-            scrollTrigger: { trigger: element, start: "top 88%", once: true },
-          },
-        );
-      });
-    }, contentRef);
-    return () => context.revert();
-  }, []);
-
   return (
-    <div ref={contentRef} className="bg-[#f4f0e8] text-[#1d2b24]">
+    <div className="bg-[#f4f0e8] text-[#1d2b24]">
       <AboutSection />
 
       <section id="services" data-reveal className="mx-auto max-w-7xl border-b border-[#d9cdbd] px-6 py-24 lg:px-10 lg:py-36">
@@ -83,7 +58,7 @@ export default function PortfolioSections() {
               <article key={project.slug} className="min-w-[82vw] snap-start sm:min-w-[420px]">
                 <Link href={`/projects/${project.slug}`} className="group relative block aspect-[4/3] overflow-hidden rounded-[2rem] bg-[#d7b995]" style={{ backgroundColor: project.accent }}>
                   {project.preview ? (
-                    <Image src={project.preview} alt={`Aperçu de ${project.name}`} fill sizes="(max-width: 640px) 82vw, 420px" className="object-cover transition duration-700 group-hover:scale-105" />
+                    <Image src={project.preview} alt={`Aperçu de ${project.name}`} fill sizes="(max-width: 640px) 82vw, 420px" quality={70} className="object-cover transition duration-700 group-hover:scale-105" />
                   ) : (
                     <div className="flex h-full items-end p-8">
                       <span className="text-[8rem] font-semibold leading-none tracking-[-0.12em] text-[#1d2b24]/70">{project.initials}</span>

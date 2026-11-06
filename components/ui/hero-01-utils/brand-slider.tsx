@@ -1,8 +1,4 @@
-import Image from "next/image";
-
 export interface BrandList {
-  image: string;
-  lightimg: string;
   name: string;
 }
 
@@ -19,15 +15,12 @@ export default function BrandSlider({ brandList }: BrandSliderProps) {
         </p>
         <div className="flex flex-wrap items-center gap-x-8 gap-y-5">
           {brandList.map((brand) => (
-            <Image
+            <span
               key={brand.name}
-              src={brand.image}
-              alt={brand.name}
-              width={112}
-              height={24}
-              unoptimized
-              className="h-5 w-auto max-w-28 object-contain opacity-60 grayscale"
-            />
+              className="text-sm font-semibold tracking-[-0.03em] text-[#1d2b24]/60"
+            >
+              {brand.name}
+            </span>
           ))}
         </div>
       </div>

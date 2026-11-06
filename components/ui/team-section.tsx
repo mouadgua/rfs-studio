@@ -1,36 +1,14 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "@/lib/language";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function TeamSection() {
-  const sectionRef = useRef<HTMLElement>(null);
   const { t } = useLanguage();
-
-  useEffect(() => {
-    const context = gsap.context(() => {
-      gsap.from("[data-team-reveal]", {
-        y: 28,
-        opacity: 0,
-        filter: "blur(8px)",
-        duration: 0.7,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
-      });
-    }, sectionRef);
-    return () => context.revert();
-  }, []);
 
   return (
     <section
       id="team"
-      ref={sectionRef}
       className="border-b border-[#d9cdbd] bg-[#f9f6f0] px-4 py-10 md:py-16"
     >
       <div className="mx-auto max-w-6xl">
