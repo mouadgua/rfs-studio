@@ -8,6 +8,32 @@ export type Project = {
   preview?: string;
   accent: string;
   initials: string;
+  gallery?: ProjectImage[];
+  video?: ProjectVideo;
+  fieldNotes?: ProjectNote[];
+  contentBlocks?: ProjectContentBlock[];
+};
+
+export type ProjectImage = {
+  src: string;
+  alt: string;
+};
+
+export type ProjectVideo = {
+  src: string;
+  poster?: string;
+  title?: string;
+};
+
+export type ProjectNote = {
+  label: string;
+  title: string;
+  text: string;
+};
+
+export type ProjectContentBlock = {
+  title: string;
+  text: string;
 };
 
 export const projects: Project[] = [
@@ -22,6 +48,41 @@ export const projects: Project[] = [
     preview: "/projects/aether-dashboard.png",
     accent: "#28d9e8",
     initials: "A",
+    fieldNotes: [
+      {
+        label: "The challenge",
+        title: "Make dense data feel immediately useful.",
+        text: "The interface needed to help small teams move from a wall of metrics to a clear next action without adding another layer of complexity.",
+      },
+      {
+        label: "The decision",
+        title: "A calm Bento system with a strong rhythm.",
+        text: "We grouped information by decision, not by source. Color, spacing, and hierarchy do the work before any chart needs to be read.",
+      },
+      {
+        label: "The takeaway",
+        title: "Clarity is a feature.",
+        text: "The best dashboard is not the one with the most data. It is the one that makes the important signal impossible to miss.",
+      },
+    ],
+    contentBlocks: [
+      {
+        title: "From raw metrics to useful moments",
+        text: "Aether was designed around the moments when a founder needs confidence: checking performance, spotting a shift, or deciding where to focus next. Every component earns its place by helping one of those moments happen faster.",
+      },
+      {
+        title: "A system made to grow",
+        text: "The visual language is intentionally modular. New metrics, alerts, and reporting views can be added without breaking the hierarchy or making the product feel heavier.",
+      },
+      {
+        title: "From raw metrics to useful moments",
+        text: "Aether was designed around the moments when a founder needs confidence: checking performance, spotting a shift, or deciding where to focus next. Every component earns its place by helping one of those moments happen faster.",
+      },
+      {
+        title: "A system made to grow",
+        text: "The visual language is intentionally modular. New metrics, alerts, and reporting views can be added without breaking the hierarchy or making the product feel heavier.",
+      },
+    ],
   },
   {
     slug: "barberelite",
@@ -34,6 +95,18 @@ export const projects: Project[] = [
     preview: "/projects/barber-elite.png",
     accent: "#d9ad2b",
     initials: "B",
+    fieldNotes: [
+      {
+        label: "The challenge",
+        title: "Turn a booking flow into a premium ritual.",
+        text: "BarberElite needed to feel more like a considered brand experience than a generic appointment form.",
+      },
+      {
+        label: "The decision",
+        title: "Let the atmosphere do the convincing.",
+        text: "Dark surfaces, restrained gold, and deliberate motion create the feeling of entering a private space before the first appointment is booked.",
+      },
+    ],
   },
   {
     slug: "kollectif-cafe",

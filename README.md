@@ -26,6 +26,23 @@ Configure `NEXT_PUBLIC_SITE_URL` with the public URL of the deployed site (for e
 `https://studio.example.com`). This value is used by the canonical URL, Open Graph
 metadata, `robots.txt`, and `sitemap.xml`.
 
+## Enrichir une page projet
+
+Chaque entrée de [`lib/projects.ts`](./lib/projects.ts) peut recevoir du contenu
+supplémentaire sans modifier le template :
+
+- `gallery`: tableau d'images local qui active automatiquement le slider ;
+- `video`: vidéo MP4 optionnelle avec poster ;
+- `fieldNotes`: cartes “Notes from the field” ;
+- `contentBlocks`: autant de sections éditoriales que nécessaire.
+
+Ces champs sont optionnels : un projet qui ne les renseigne pas conserve la page
+courte actuelle.
+
+Les articles du journal sont définis dans [`lib/journal.ts`](./lib/journal.ts).
+Ajoute un objet dans `journalArticles` pour créer automatiquement une nouvelle
+page `/journal/[slug]`, avec sa métadonnée et son entrée dans le sitemap.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -2,30 +2,8 @@
 
 import { ArrowUpRight, CalendarDays } from "lucide-react";
 import { useLanguage } from "@/lib/language";
-
-const articles = [
-  {
-    category: "Event",
-    date: "18.10.2025",
-    titleKey: "blogArticle1Title",
-    excerptKey: "blogArticle1Excerpt",
-    color: "bg-[#d96f4f]",
-  },
-  {
-    category: "Talk",
-    date: "04.06.2025",
-    titleKey: "blogArticle2Title",
-    excerptKey: "blogArticle2Excerpt",
-    color: "bg-[#9aa88f]",
-  },
-  {
-    category: "Workshop",
-    date: "22.03.2025",
-    titleKey: "blogArticle3Title",
-    excerptKey: "blogArticle3Excerpt",
-    color: "bg-[#d7b995]",
-  },
-] as const;
+import Link from "next/link";
+import { journalArticles } from "@/lib/journal";
 
 export default function BlogSection() {
   const { t } = useLanguage();
@@ -53,41 +31,50 @@ export default function BlogSection() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {articles.map((article) => (
+        <div className="relative mx-auto max-w-5xl space-y-8">
+          {journalArticles.map((article, index) => (
             <article
-              key={article.titleKey}
-              data-blog-reveal
-              className="group flex flex-col"
+              key={article.slug}
+              className="blog-stack-card group sticky top-24 min-h-[30rem] overflow-hidden rounded-[2rem] border border-[#1d2b24]/10 p-7 shadow-[0_24px_70px_-35px_rgba(29,43,36,0.55)] md:min-h-[34rem] md:p-12"
+              style={{
+                top: `calc(6rem + ${index * 1.5}rem)`,
+                zIndex: index + 1,
+              }}
             >
               <div
-                className={`relative aspect-[4/3] overflow-hidden rounded-[1.75rem] ${article.color}`}
-              >
-                <div className="absolute inset-6 rounded-[1.25rem] border border-[#1d2b24]/20 transition-transform duration-500 group-hover:rotate-3 group-hover:scale-105" />
-                <span className="absolute bottom-6 left-6 text-6xl font-semibold tracking-[-0.1em] text-[#1d2b24]/75">
-                  rfs
-                </span>
-                <span className="absolute right-5 top-5 rounded-full bg-[#f4f0e8]/80 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-[#1d2b24]">
-                  {article.category}
-                </span>
-              </div>
-              <div className="flex flex-1 flex-col pt-5">
-                <div className="flex items-center gap-2 text-xs text-[#8b7561]">
-                  <CalendarDays className="h-3.5 w-3.5" />
-                  {article.date}
+                className={`absolute inset-0 ${
+                  index === 0 ? "bg-[#d96f4f]" : index === 1 ? "bg-[#9aa88f]" : "bg-[#d7b995]"
+                }`}
+              />
+              <div className="relative flex h-full flex-col justify-between">
+                <div className="flex items-start justify-between gap-6">
+                  <span className="text-[clamp(5rem,14vw,10rem)] font-semibold leading-none tracking-[-0.14em] text-[#1d2b24]/25">
+                    0{index + 1}
+                  </span>
+                  <span className="rounded-full bg-[#f4f0e8]/75 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-[#1d2b24]">
+                    {article.category}
+                  </span>
                 </div>
-                <h3 className="mt-3 text-2xl leading-tight tracking-[-0.05em] text-[#1d2b24]">
-                  {t(article.titleKey)}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-[#68736b]">
-                  {t(article.excerptKey)}
-                </p>
-                <a
-                  href="#contact"
-                  className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-medium text-[#d96f4f] transition-all hover:gap-4"
-                >
-                  {t("blogRead")} <ArrowUpRight className="h-4 w-4" />
-                </a>
+                <div className="max-w-2xl">
+                  <div className="flex items-center gap-2 text-xs text-[#1d2b24]/65">
+                    <CalendarDays className="h-3.5 w-3.5" />
+                    {article.date}
+                  </div>
+                  <h3 className="mt-4 text-4xl leading-[0.95] tracking-[-0.07em] text-[#1d2b24] md:text-6xl">
+                    {t(`blogArticle${index + 1}Title` as "blogArticle1Title")}
+                  </h3>
+                  <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#1d2b24]/70 md:text-base">
+                    {t(`blogArticle${index + 1}Excerpt` as "blogArticle1Excerpt")}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-[#8b7561]">
+                  <Link
+                    href={`/journal/${article.slug}`}
+                    className="inline-flex items-center gap-2 rounded-full bg-[#1d2b24] px-4 py-2.5 text-sm text-[#f4f0e8] transition-transform hover:-translate-y-0.5"
+                  >
+                    {t("blogRead")} <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </div>
               </div>
             </article>
           ))}
