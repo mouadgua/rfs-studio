@@ -46,3 +46,9 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  textPath animate {
+    display: none;
+  }
+}
