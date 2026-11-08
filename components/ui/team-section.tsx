@@ -1,10 +1,29 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 import { useLanguage } from "@/lib/language";
+import ProfileCard from "@/components/ui/profile-card";
+
+const teamMembers = [
+  {
+    name: "Mouad Guarraz",
+    title: "Creative developer · rfs studio",
+    handle: "mouadgua",
+    avatarUrl: "/mouad-guarraz.jpeg",
+  },
+];
 
 export default function TeamSection() {
   const { t } = useLanguage();
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  function moveCarousel(direction: -1 | 1) {
+    carouselRef.current?.scrollBy({
+      left: direction * carouselRef.current.clientWidth,
+      behavior: "smooth",
+    });
+  }
 
   return (
     <section
@@ -17,28 +36,54 @@ export default function TeamSection() {
             <span className="animate-spin text-xl text-[#d96f4f] [animation-duration:6s]">✱</span>
             {t("teamLabel")}
           </div>
-          <div className="flex gap-2 text-[10px] font-medium uppercase text-[#d96f4f]">
-            <SocialLink label="Instagram" />
-            <SocialLink label="LinkedIn" />
-            <SocialLink label="GitHub" />
-          </div>
         </div>
 
-        <div data-team-reveal className="relative overflow-hidden rounded-[2rem] bg-[#1d2b24]">
-          <div className="grid min-h-[300px] grid-cols-2 gap-3 p-3 md:min-h-[440px] md:grid-cols-4 md:p-5">
-            <div className="rounded-[1.4rem] bg-[#d96f4f]" />
-            <div className="rounded-[1.4rem] bg-[#9aa88f] md:translate-y-10" />
-            <div className="rounded-[1.4rem] bg-[#d7b995] md:-translate-y-5" />
-            <div className="rounded-[1.4rem] bg-[#f4f0e8] md:translate-y-14" />
+        <div
+          data-team-reveal
+          className="rounded-[2rem] bg-[#fbf8f2] px-4 py-8 md:px-10 md:py-12"
+        >
+          <div className="mb-6 flex items-center justify-between">
+            <p className="text-xs uppercase tracking-[0.18em] text-[#8b7561]">
+              {teamMembers.length.toString().padStart(2, "0")}{" "}
+              {t("teamMinds")}
+            </p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => moveCarousel(-1)}
+                aria-label="Previous team member"
+                className="rounded-full border border-[#d9cdbd] p-2 text-[#1d2b24] transition-colors hover:bg-[#e8dfd1] disabled:opacity-40"
+                disabled={teamMembers.length < 2}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => moveCarousel(1)}
+                aria-label="Next team member"
+                className="rounded-full border border-[#d9cdbd] p-2 text-[#1d2b24] transition-colors hover:bg-[#e8dfd1] disabled:opacity-40"
+                disabled={teamMembers.length < 2}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <span className="text-[clamp(4rem,14vw,10rem)] font-semibold tracking-[-0.14em] text-[#f4f0e8]/90">rfs</span>
+          <div
+            ref={carouselRef}
+            className="team-card-carousel"
+            aria-label="Team members"
+          >
+            {teamMembers.map((member) => (
+              <div className="team-card-slide" key={member.handle}>
+                <ProfileCard {...member} />
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-5 py-5 text-sm" data-team-reveal>
           <div className="flex flex-wrap gap-4 text-[#68736b]">
-            <span><strong className="text-[#d96f4f]">03</strong> {t("teamMinds")}</span>
+            <span><strong className="text-[#d96f4f]">01</strong> {t("teamMinds")}</span>
             <span className="text-[#d9cdbd]">|</span>
             <span><strong className="text-[#d96f4f]">01</strong> {t("teamVision")}</span>
           </div>
@@ -67,35 +112,7 @@ export default function TeamSection() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-3" data-team-reveal>
-          {["Mouad — Creative direction", "Nora — Brand strategy", "Yassine — Digital design"].map((member, index) => (
-            <div key={member} className="border-t border-[#d9cdbd] pt-4">
-              <div className={`mb-4 aspect-[4/3] rounded-[1.5rem] ${index === 0 ? "bg-[#d96f4f]" : index === 1 ? "bg-[#9aa88f]" : "bg-[#d7b995]"}`} />
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-sm text-[#536158]">{member}</p>
-                <div className="flex gap-2 text-[10px] font-medium uppercase text-[#d96f4f]">
-                  <SocialLink label="IG" />
-                  <SocialLink label="IN" />
-                  <SocialLink label="GH" />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
-  );
-}
-
-function SocialLink({ label }: { label: string }) {
-  return (
-    <a
-      href="mailto:mouadguarraz@gmail.com?subject=rfs%20studio%20social%20profile"
-      aria-label={`${label} — profile URL pending`}
-      title="Profile link coming soon"
-      className="transition-opacity hover:opacity-60"
-    >
-      {label}
-    </a>
   );
 }

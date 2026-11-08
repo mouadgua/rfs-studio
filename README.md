@@ -26,6 +26,19 @@ Configure `NEXT_PUBLIC_SITE_URL` with the public URL of the deployed site (for e
 `https://studio.example.com`). This value is used by the canonical URL, Open Graph
 metadata, `robots.txt`, and `sitemap.xml`.
 
+## Performance checks
+
+Run the production performance suite before deploying:
+
+```bash
+npm run test:performance
+```
+
+The command builds the app, starts it with the production server, requests every
+generated journal and project route, and fails on server errors, rendered not-found
+pages, responses slower than five seconds, or HTML responses larger than 500 KB. It
+also enforces a 4 MB per-project-image and 16 MB total project-image budget.
+
 ## Enrichir une page projet
 
 Chaque entrée de [`lib/projects.ts`](./lib/projects.ts) peut recevoir du contenu
