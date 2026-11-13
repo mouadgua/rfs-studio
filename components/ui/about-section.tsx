@@ -18,9 +18,9 @@ export default function AboutSection() {
             {t("aboutLabel")}
           </div>
           <div className="flex gap-2 text-[#68736b]" data-about-reveal>
-            <SocialIcon label="Instagram" />
-            <SocialIcon label="LinkedIn" />
-            <SocialIcon label="GitHub" />
+            <SocialIcon label="Instagram" href="https://www.instagram.com/mouadinho__" />
+            <SocialIcon label="GitHub" href="https://github.com/mouadgua" />
+            <SocialIcon label="WhatsApp" href="https://wa.me/212674451180" />
           </div>
         </div>
 
@@ -70,13 +70,15 @@ export default function AboutSection() {
   );
 }
 
-function SocialIcon({ label }: { label: string }) {
+function SocialIcon({ label, href }: { label: string; href: string }) {
   return (
     <a
-      href="mailto:mouadguarraz@gmail.com?subject=rfs%20studio%20social%20profile"
-      aria-label={`${label} — profile URL pending`}
-      title="Profile link coming soon"
-      className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#d9cdbd] bg-[#f4f0e8] transition-colors hover:bg-[#e8dfd1]"
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={label}
+      title={label}
+      className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#d9cdbd] bg-[#f4f0e8] transition-colors hover:bg-[#e8dfd1] hover:text-[#d96f4f]"
     >
       {label.slice(0, 2)}
     </a>

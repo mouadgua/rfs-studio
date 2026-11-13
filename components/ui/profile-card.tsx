@@ -4,29 +4,30 @@ import { ExternalLink, Mail, Phone, Send } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 
+type ProfileLink = {
+  label: string;
+  href: string;
+  icon: typeof ExternalLink;
+};
+
 type ProfileCardProps = {
   name: string;
   title: string;
   handle: string;
   avatarUrl: string;
+  email?: string;
+  phone?: string;
+  links?: ProfileLink[];
 };
-
-const profileLinks = [
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/mouadinho__",
-    icon: ExternalLink,
-  },
-  { label: "GitHub", href: "https://github.com/mouadgua", icon: ExternalLink },
-  { label: "Email", href: "mailto:mouadguarraz@gmail.com", icon: Mail },
-  { label: "Téléphone", href: "tel:+212674451180", icon: Phone },
-];
 
 export default function ProfileCard({
   name,
   title,
   handle,
   avatarUrl,
+  email,
+  phone,
+  links = [],
 }: ProfileCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -85,31 +86,51 @@ export default function ProfileCard({
             Available for a conversation
           </p>
         </div>
-        <a
-          href="mailto:mouadguarraz@gmail.com"
-          className="profile-card__contact"
-          aria-label="Envoyer un email à Mouad"
-        >
-          <Send className="h-4 w-4" />
-          Contact
-        </a>
+        <div className="flex items-center gap-2">
+          {phone && (
+            <a
+              href={`tel:${phone.replace(/\s/g, "")}`}
+              className="profile-card__contact"
+              aria-label={`Appeler ${name}`}
+              style={{ background: "#1d2b24" }}
+            >
+              <Phone className="h-4 w-4" />
+            </a>
+          )}
+          {email && (
+            <a
+              href={`mailto:${email}`}
+              className="profile-card__contact"
+              aria-label={`Envoyer un email à ${name}`}
+            >
+              <Send className="h-4 w-4" />
+              Contact
+            </a>
+          )}
+        </div>
       </div>
 
-      <nav className="profile-card__links" aria-label="Coordonnées de Mouad">
-        {profileLinks.map(({ label, href, icon: Icon }) => (
-          <a
-            key={label}
-            href={href}
-            target={href.startsWith("http") ? "_blank" : undefined}
-            rel={href.startsWith("http") ? "noreferrer" : undefined}
-            aria-label={label}
-            title={label}
-          >
-            <Icon className="h-4 w-4" />
-            <span>{label}</span>
-          </a>
-        ))}
-      </nav>
+      {links.length > 0 && (
+        <nav
+          className="profile-card__links"
+          style={{ gridTemplateColumns: `repeat(${links.length}, minmax(0, 1fr))` }}
+          aria-label={`Coordonnées de ${name}`}
+        >
+          {links.map(({ label, href, icon: Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("http") ? "_blank" : undefined}
+              rel={href.startsWith("http") ? "noreferrer" : undefined}
+              aria-label={label}
+              title={label}
+            >
+              <Icon className="h-4 w-4" />
+              <span>{label}</span>
+            </a>
+          ))}
+        </nav>
+      )}
     </div>
   );
 }

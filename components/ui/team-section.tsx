@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, ExternalLink, Mail, Phone } from "lucide-react";
 import { useRef } from "react";
 import { useLanguage } from "@/lib/language";
 import ProfileCard from "@/components/ui/profile-card";
@@ -11,6 +11,26 @@ const teamMembers = [
     title: "Creative developer · rfs studio",
     handle: "mouadgua",
     avatarUrl: "/mouad-guarraz.jpeg",
+    email: "mouadguarraz@gmail.com",
+    links: [
+      { label: "Instagram", href: "https://www.instagram.com/mouadinho__", icon: ExternalLink },
+      { label: "GitHub", href: "https://github.com/mouadgua", icon: ExternalLink },
+      { label: "Email", href: "mailto:mouadguarraz@gmail.com", icon: Mail },
+      { label: "Téléphone", href: "tel:+212674451180", icon: Phone },
+    ],
+  },
+  {
+    name: "El Hansali Youssef",
+    title: "Member · rfs studio",
+    handle: "thisaint_youssef",
+    avatarUrl: "/youssef-elhansali.jpg",
+    email: "elhansaliyoussef8@gmail.com",
+    phone: "+212644900591",
+    links: [
+      { label: "Instagram", href: "https://www.instagram.com/thisaint_youssef?igsh=bXFxbWR1cmZpaXJz", icon: ExternalLink },
+      { label: "GitHub", href: "https://github.com/rfifissaclub-png", icon: ExternalLink },
+      { label: "Email", href: "mailto:elhansaliyoussef8@gmail.com", icon: Mail },
+    ],
   },
 ];
 
@@ -83,7 +103,7 @@ export default function TeamSection() {
 
         <div className="flex flex-wrap items-center justify-between gap-5 py-5 text-sm" data-team-reveal>
           <div className="flex flex-wrap gap-4 text-[#68736b]">
-            <span><strong className="text-[#d96f4f]">01</strong> {t("teamMinds")}</span>
+            <span><strong className="text-[#d96f4f]">02</strong> {t("teamMinds")}</span>
             <span className="text-[#d9cdbd]">|</span>
             <span><strong className="text-[#d96f4f]">01</strong> {t("teamVision")}</span>
           </div>
